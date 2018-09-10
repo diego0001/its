@@ -6,10 +6,10 @@ dist: xenial
 osx_image: xcode11.6
 sudo: required
 env:
-  - EMULATOR=simh BASICS=yes
-  - EMULATOR=klh10 BASICS=yes
+  # EMULATOR=simh BASICS=yes
+  # EMULATOR=klh10 BASICS=yes
   - EMULATOR=pdp10-ka BASICS=yes
-  - EMULATOR=pdp10-kl BASICS=yes
+  # EMULATOR=pdp10-kl BASICS=yes
 matrix:
   exclude:
     - os: osx
