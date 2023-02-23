@@ -72,6 +72,8 @@ respond "*" ":job booter\r"
 respond "*" ":load sysbin;\r"
 # Enter an empty password for AS.
 dm_password "AS" ""
+# ITS lore is that DM had this user.
+dm_password "URANUS" "RINGS"
 respond "*" "\033y"
 respond " " "sys;\021 \021 pass \021 words\r"
 respond "*" ":kill\r"
