@@ -38,26 +38,41 @@ type ":vk\r"
 respond "*" ":link sys; atsign sursnd, survey;\r"
 type ":vk\r"
 
+set loc 2
+
+proc dm_password {user pass} {
+    global loc
+    respond "*" ":job pw\r"
+    respond "*" "$loc/"
+    set loc [expr $loc + 1]
+    respond "0" "\0331'$user\033\r"
+    respond "\n" ":job booter\r"
+    respond "*" "start/"
+    respond "MOVE P," "\033q\033x"
+    respond "*" "a/"
+    expect  "   "
+    respond "   " "\0331'$pass\033\r"
+    respond "\n" ":go scramble\r"
+    expect "ILOPR"
+    respond "0>>0" "a/"
+    respond "   " ":job pw\r"
+    respond "*" "$loc/"
+    set loc [expr $loc + 1]
+    respond "0" "\0331q\r"
+    respond "\n" ":vk\r"
+}
+
 # Login program.
 respond "*" ":midas sysbin;_syseng; booter\r"
 expect ":KILL"
-# Enter an empty password for AS.
+
+# Enter users into the password file.
 respond "*" ":job pw\r"
-respond "*" "2/"
-respond "0" "\0331'AS\033\r"
-respond "\n" ":job booter\r"
+respond "*" ":job booter\r"
 respond "*" ":load sysbin;\r"
-respond "*" "start/"
-respond "LITTER" "\033q\033x"
-respond "*" "a/"
-respond "0" "\0331'\033\r"
-respond "\n" ":go scramble\r"
-expect "ILOPR"
-respond "0>>0" "a/"
-respond "   " ":job pw\r"
-respond "*" "3/"
-respond "0" "\0331q\r"
-respond "\n" "\033y"
+# Enter an empty password for AS.
+dm_password "AS" ""
+respond "*" "\033y"
 respond " " "sys;\021 \021 pass \021 words\r"
 respond "*" ":kill\r"
 respond "*" ":kill\r"
